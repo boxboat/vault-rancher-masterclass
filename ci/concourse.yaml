@@ -1,0 +1,25 @@
+---
+resources:
+  - name: vault-repo
+    type: git
+    icon: github-circle
+    source:
+      uri: https://github.com/boxboat/vault-rancher-masterclass
+
+jobs:
+  - name: job
+    public: true
+    plan:
+      - get: vault-repo
+        trigger: true
+      - task: list-files
+        config:
+          inputs:
+            - name: vault-repos
+          platform: linux
+          image_resource:
+            type: registry-image
+            source: { repository: busybox }
+          run:
+            path: ls
+            args: ["-la", "./vault-repo"]

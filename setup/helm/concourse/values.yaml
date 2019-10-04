@@ -152,7 +152,7 @@ concourse:
     ##
     ## Example: http://ci.concourse-ci.org
     ##
-    externalUrl:
+    externalUrl: http://concourse.rancher.boxboat.io
 
     encryption:
       ## Enable encryption of pipeline configuration. Encryption keys can be set via secrets
@@ -1385,7 +1385,7 @@ web:
     ## For minikube, set this to ClusterIP, elsewhere use LoadBalancer or NodePort
     ## Ref: https://kubernetes.io/docs/user-guide/services/#publishing-services---service-types
     ##
-    type: ClusterIP
+    type: NodePort
 
     ## When using `web.service.type: LoadBalancer`, sets the user-specified load balancer IP.
     ## Example: 172.217.1.174
@@ -1436,21 +1436,28 @@ web:
   ingress:
     ## Enable Ingress.
     ##
-    enabled: false
+    enabled: true
 
     ## Annotations to be added to the web ingress.
     ## Example:
     ##   kubernetes.io/ingress.class: nginx
     ##   kubernetes.io/tls-acme: 'true'
     ##
-    annotations: {}
+    annotations: 
+      kubernetes.io/ingress.global-static-ip-name: rancher-demo-app
+      certmanager.k8s.io/acme-http01-edit-in-place: "true"
+      certmanager.k8s.io/cluster-issuer: letsencrypt
+      kubernetes.io/tls-acme: "true"
+      nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    
 
     ## Hostnames.
     ## Must be provided if Ingress is enabled.
     ## Example:
     ##   - concourse.domain.com
     ##
-    hosts:
+    hosts: 
+      - concourse.rancher.boxboat.io
 
     ## TLS configuration.
     ## Secrets must be manually created in the namespace.
@@ -1698,16 +1705,16 @@ postgresql:
 
   ### PostgreSQL User to create.
   ##
-  postgresqlUsername: concourse
+  #postgresqlUsername: concourse
 
   ## PostgreSQL Password for the new user.
   ## If not set, a random 10 characters password will be used.
   ##
-  postgresqlPassword: concourse
+  #postgresqlPassword: concourse
 
   ## PostgreSQL Database to create.
   ##
-  postgresqlDatabase: concourse
+  #postgresqlDatabase: concourse
 
   ## Persistent Volume Storage configuration for PostgreSQL.
   ##
@@ -1762,7 +1769,7 @@ rbac:
 secrets:
   ## Create the secret resource from the following values. Set this to
   ## false to manage these secrets outside Helm.
-  ##
+  ##y
   create: true
 
   ## Array of team names and public keys for team external workers.

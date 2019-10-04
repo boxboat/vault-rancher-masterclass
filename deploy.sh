@@ -48,6 +48,8 @@ helm install setup/helm/rancher \
   --name rancher \
   --namespace cattle-system \
 
-helm install setup/helm/vault
+helm install setup/helm/vault --name vault --namespace vault
 
-helm install setup/helm/concourse
+helm install setup/helm/concourse --name concourse --namespace concourse
+
+helm install setup/helm/mysql --name mysql --namespace mysql

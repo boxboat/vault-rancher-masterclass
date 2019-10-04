@@ -35,7 +35,7 @@ debug: false
 #   value: "registry.example.com"
 
 # Fully qualified name to reach your Rancher server
-# hostname: rancher.my.org
+hostname: rancher.rancher.boxboat.io
 
 ## Optional array of imagePullSecrets containing private registry credentials
 ## Ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
@@ -50,7 +50,7 @@ ingress:
     certmanager.k8s.io/cluster-issuer: letsencrypt
     kubernetes.io/tls-acme: "true"
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
-    kubernetes.io/ingress.global-static-ip-name: rancher-masterclass
+    kubernetes.io/ingress.global-static-ip-name: rancher-demo-rancher
 
   # configurationSnippet - Add additional Nginx configuration. This example statically sets a header on the ingress.
   # configurationSnippet: |
