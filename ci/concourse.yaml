@@ -15,7 +15,7 @@ jobs:
       - task: list-files
         config:
           inputs:
-            - name: vault-repos
+            - name: vault-repo
           platform: linux
           image_resource:
             type: registry-image
