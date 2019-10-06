@@ -2,7 +2,7 @@ path "database/*" {
   policy = "write"
 }
 
-path "policies" {
+path "policies/*" {
   policy="write"
 }
 

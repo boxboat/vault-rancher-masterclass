@@ -18,3 +18,7 @@ kubectl -n vault exec $VAULT_POD -c vault -- vault write auth/userpass/users/con
 kubectl -n vault exec $VAULT_POD -c vault -- vault secrets enable database 
 kubectl -n vault exec $VAULT_POD -c vault -- vault write database/config/mysql plugin_name=mysql-database-plugin connection_url="{{username}}:{{password}}@tcp(mysql.mysql:3306)/" allowed_roles="my-role" username="root" password="testing" 
 kubectl -n vault exec $VAULT_POD -c vault -- vault write database/roles/my-role db_name=mysql creation_statements="CREATE USER '{{name}}'@'%' IDENTIFIED BY '{{password}}';GRANT SELECT ON *.* TO '{{name}}'@'%';" default_ttl="1h" max_ttl="24h"
+
+CONCOURSE_POLICY="vault/policies/concourse-policy.hcl"
+kubectl -n vault cp vault/policies/concourse-policy.hcl $VAULT_POD:/root/concourse-policy.hcl
+kubectl -n vault exec $VAULT_POD -c vault -- vault policy write concourse /root/concourse-policy.hcl
