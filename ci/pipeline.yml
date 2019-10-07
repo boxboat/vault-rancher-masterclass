@@ -7,19 +7,27 @@ resources:
       uri: https://github.com/boxboat/vault-rancher-masterclass
 
 jobs:
-  - name: job
+  - name: vault-push
     public: true
     plan:
       - get: vault-repo
         trigger: true
-      - task: list-files
+      - task: vault-run
+        file:
         config:
           inputs:
             - name: vault-repo
           platform: linux
+
           image_resource:
-            type: registry-image
-            source: { repository: busybox }
+            type: docker-image
+            source:
+              repository: boxboat/concourse-vault
+              tag: 'latest'
+
+          inputs:
+          - name: vault-repo
           run:
-            path: ls
-            args: ["-la", "./vault-repo"]
+
+            path: ci/vault-auth.sh
+            dir: vault-repo
