@@ -2,11 +2,11 @@ path "database/*" {
   policy = "write"
 }
 
-path "policies/*" {
+path "/sys/policies/*" {
   policy="write"
 }
 
-path "policy/*" {
+path "/sys/policy/*" {
   policy="write"
 }
 
