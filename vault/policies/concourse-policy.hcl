@@ -6,6 +6,6 @@ path "policies/*" {
   policy="write"
 }
 
-path "auth/kubernetes/*" {
+path "auth/kubernetes/role/*" {
   policy = "write"
 }

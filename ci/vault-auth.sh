@@ -1,0 +1,1 @@
+vault login --method=userpass username=concourse password=password

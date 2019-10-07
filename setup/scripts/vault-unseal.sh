@@ -22,3 +22,9 @@ kubectl -n vault exec $VAULT_POD -c vault -- vault write database/roles/my-role 
 CONCOURSE_POLICY="vault/policies/concourse-policy.hcl"
 kubectl -n vault cp vault/policies/concourse-policy.hcl $VAULT_POD:/root/concourse-policy.hcl
 kubectl -n vault exec $VAULT_POD -c vault -- vault policy write concourse /root/concourse-policy.hcl
+
+APISERVER=$(kubectl config view --minify | grep server | cut -f 2- -d ":" | tr -d " ")
+VAULT_JWT=$(kubectl get secret --namespace=vault -o jsonpath='{.items[0].data.token}' | base64 -d)
+VAULT_CA=$(kubectl get secret --namespace=vault -o jsonpath='{.items[0].data.ca\.crt}' | base64 -d)
+
+kubectl -n vault exec $VAULT_POD -c vault -- vault write auth/kubernetes/config token_reviewer_jwt=$VAULT_JWT kubernetes_host=$APISERVER kubernetes_ca_cert=$VAULT_CA
