@@ -29,5 +29,6 @@ jobs:
           - name: vault-repo
           run:
 
-            path: ci/vault-auth.sh
+            path: sh
+            args: [ci/vault-auth.sh]
             dir: vault-repo
