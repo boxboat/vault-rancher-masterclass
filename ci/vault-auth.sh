@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VAULT_ADDRESS=http://vault.vault.svc.cluster.local:8200
+export VAULT_ADDRESS=http://vault.vault.svc.cluster.local:8200
 vault login --method=userpass username=concourse password=password
 
 for file in vault/app; do
