@@ -53,3 +53,5 @@ helm install setup/helm/vault --name vault --namespace vault
 helm install setup/helm/concourse --name concourse --namespace concourse
 
 helm install setup/helm/mysql --name mysql --namespace mysql
+
+helm install setup/helm/boxboat-helloworld --name=app
