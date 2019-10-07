@@ -14,11 +14,12 @@ jobs:
         trigger: true
       - task: vault-run
         file:
+        params:
+          VAULT_ADDR: http://vault.vault.svc.cluster.local:8200
         config:
           inputs:
             - name: vault-repo
           platform: linux
-
           image_resource:
             type: docker-image
             source:
