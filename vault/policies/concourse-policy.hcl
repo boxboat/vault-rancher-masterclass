@@ -1,15 +1,15 @@
 path "database/*" {
-  policy = "write"
+  policy = ["create", "update", "delete", "list"]
 }
 
 path "/sys/policies/*" {
-  policy="write"
+  policy= ["create", "update", "delete", "list"]
 }
 
 path "/sys/policy/*" {
-  policy="write"
+  policy= ["create", "update", "delete", "list"]
 }
 
 path "auth/kubernetes/role/*" {
-  policy = "write"
+  policy = ["create", "update", "delete", "list"]
 }
