@@ -1,6 +1,6 @@
 #!/bin/bash
 
-vault login --method=userpass username=concourse password=password
+token=$(vault login --method=userpass username=concourse password=password)
 
 for file in vault/apps/*; do
      sh $file
