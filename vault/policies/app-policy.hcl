@@ -1,3 +1,3 @@
 path "database/creds/mysql/test" {
-    policy= ["create", "update", "list"]
+    capabilities = ["create", "update", "list"]
 }
