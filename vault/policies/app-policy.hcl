@@ -1,3 +1,3 @@
-# path "database/creds/mysql/test" {
-#     capabilities = ["create", "update", "list"]
-# }
+path "database/creds/mysql/test" {
+    capabilities = ["create", "update", "list"]
+}
